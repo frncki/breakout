@@ -13,7 +13,7 @@ export function scene_main(game: Game) {
         Using: [control_paddle(), move(300, [0, 0]), draw_rect(83, 23, "#bada55")], // paletka
     });
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 2; i++) {
         game.Add({
             Translation: [
                 Math.random() * (game.ViewportWidth - 23),
