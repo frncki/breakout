@@ -13,8 +13,17 @@ export function scene_main(game: Game) {
         Using: [control_paddle(), move(300, [0, 0]), draw_rect(83, 23, "#bada55")], // paletka
     });
 
-    game.Add({
-        Translation: [game.ViewportWidth / 2, game.ViewportHeight / 2],
-        Using: [control_ball(), move(600, [1, 1]), draw_rect(23, 23, "#f00ba4")], // pilka
-    });
+    for (let i = 0; i < 100; i++) {
+        game.Add({
+            Translation: [
+                Math.random() * (game.ViewportWidth - 23),
+                Math.random() * (game.ViewportHeight - 23),
+            ],
+            Using: [
+                control_ball(Math.random()),
+                move(600, [Math.random(), Math.random()]),
+                draw_rect(23, 23, "#f00ba4"),
+            ], // pilka
+        });
+    }
 }
