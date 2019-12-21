@@ -20,7 +20,7 @@ export class Game {
     public UI = document.querySelector("main")!;
     public InputState: InputState = {mouse_x: 0, mouse_y: 0};
     public InputEvent: InputEvent = {mouse_x: 0, mouse_y: 0, wheel_y: 0};
-    public ClearColor = "#fff";
+    public ClearColor = "#333";
 
     private RAF: number = 0;
 

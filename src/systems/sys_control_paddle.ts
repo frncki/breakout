@@ -14,7 +14,17 @@ export function sys_control_paddle(game: Game, delta: number) {
 
 function update(game: Game, entity: Entity, delta: number) {
     let direction = <Vec2>[0, 0];
-    let speed = 300;
+    let speed = 200;
+
+    const left = game.InputState.ArrowLeft;
+    const right = game.InputState.ArrowRight;
+    const up = game.InputState.ArrowUp;
+    const down = game.InputState.ArrowDown;
+
+    if (left) direction[0] -= 1;
+    if (right) direction[0] += 1;
+    if (up) direction[1] -= 1;
+    if (down) direction[1] += 1;
 
     let transform = game.World.Transform2D[entity];
     transform.Translation[0] += direction[0] * speed * delta;
