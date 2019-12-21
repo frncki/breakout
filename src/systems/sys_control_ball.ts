@@ -1,6 +1,6 @@
 import {Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
-import {Vec2} from "../math/index.js";
+import {normalize} from "../math/vec2.js";
 
 const QUERY = Has.Transform2D | Has.ControlBall;
 
@@ -13,21 +13,15 @@ export function sys_control_ball(game: Game, delta: number) {
 }
 
 function update(game: Game, entity: Entity, delta: number) {
-    let direction = <Vec2>[1, 1];
-    let speed = 100;
-
-    // const left = game.InputState.ArrowLeft;
-    // const right = game.InputState.ArrowRight;
-    // const up = game.InputState.ArrowUp;
-    // const down = game.InputState.ArrowDown;
-
-    // if (left) direction[0] -= 1;
-    // if (right) direction[0] += 1;
-    // if (up) direction[1] -= 1;
-    // if (down) direction[1] += 1;
-
+    let move = game.World.Move[entity];
     let transform = game.World.Transform2D[entity];
-    transform.Translation[0] += direction[0] * speed * delta;
-    transform.Translation[1] += direction[1] * speed * delta;
-    transform.Dirty = true;
+
+    if (transform.Translation[0] > game.ViewportWidth - 1 || transform.Translation[0] < 1) {
+        move.Direction[0] *= -1;
+    }
+    if (transform.Translation[1] > game.ViewportHeight - 1 || transform.Translation[1] < 1) {
+        move.Direction[1] *= -1;
+    }
+
+    normalize(move.Direction, move.Direction);
 }
