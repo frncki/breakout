@@ -2,9 +2,9 @@ import {Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
 import {Vec2} from "../math/index.js";
 
-const QUERY = Has.Transform2D | Has.ControlPaddle;
+const QUERY = Has.Transform2D | Has.ControlBall;
 
-export function sys_control_paddle(game: Game, delta: number) {
+export function sys_control_ball(game: Game, delta: number) {
     for (let i = 0; i < game.World.Mask.length; i++) {
         if ((game.World.Mask[i] & QUERY) == QUERY) {
             update(game, i, delta);
@@ -13,16 +13,16 @@ export function sys_control_paddle(game: Game, delta: number) {
 }
 
 function update(game: Game, entity: Entity, delta: number) {
-    let direction = <Vec2>[0, 0];
-    let speed = 300;
+    let direction = <Vec2>[1, 1];
+    let speed = 100;
 
-    const left = game.InputState.ArrowLeft;
-    const right = game.InputState.ArrowRight;
-    const up = game.InputState.ArrowUp;
-    const down = game.InputState.ArrowDown;
+    // const left = game.InputState.ArrowLeft;
+    // const right = game.InputState.ArrowRight;
+    // const up = game.InputState.ArrowUp;
+    // const down = game.InputState.ArrowDown;
 
-    if (left) direction[0] -= 1;
-    if (right) direction[0] += 1;
+    // if (left) direction[0] -= 1;
+    // if (right) direction[0] += 1;
     // if (up) direction[1] -= 1;
     // if (down) direction[1] += 1;
 
