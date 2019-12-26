@@ -19,13 +19,13 @@ function update(game: Game, entity: Entity, delta: number) {
 
     const left = game.InputState.ArrowLeft;
     const right = game.InputState.ArrowRight;
-    const up = game.InputState.ArrowUp;
-    const down = game.InputState.ArrowDown;
+    // const up = game.InputState.ArrowUp;
+    // const down = game.InputState.ArrowDown;
 
     if (left) move.Direction[0] -= 1;
     if (right) move.Direction[0] += 1;
-    if (up) move.Direction[1] -= 1;
-    if (down) move.Direction[1] += 1;
+    // if (up) move.Direction[1] -= 1;
+    // if (down) move.Direction[1] += 1;
 
     normalize(move.Direction, move.Direction);
 }

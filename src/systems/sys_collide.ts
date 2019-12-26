@@ -26,9 +26,31 @@ export function sys_collide(game: Game, delta: number) {
     }
 }
 
-function compute_aabb(transform: Transform2D, collide: Collide) {}
+function compute_aabb(transform: Transform2D, collide: Collide) {
+    //obliczyc min, max, center
+    collide.Center = [transform.Translation[0], transform.Translation[1]];
+    collide.Min = [
+        collide.Center[0] - collide.Size[0] / 2,
+        collide.Center[1] - collide.Size[1] / 2,
+    ];
+    collide.Max = [
+        collide.Center[0] + collide.Size[0] / 2,
+        collide.Center[1] + collide.Size[1] / 2,
+    ];
+}
 
-function check_collisions(collider: Collide, colliders: Collide[]) {}
+function check_collisions(collider: Collide, colliders: Collide[]) {
+    //wywoluje intersectaabb jezeli true wykonac penetrate
+
+    for (let i = 0; i < colliders.length; i++) {
+        if (collider != colliders[i] && intersect_aabb(collider, colliders[i])) {
+            collider.Collisions.push({
+                Other: colliders[i],
+                Hit: penetrate_aabb(collider, colliders[i]),
+            });
+        }
+    }
+}
 
 function penetrate_aabb(a: Collide, b: Collide) {
     let distance_x = a.Center[0] - b.Center[0];
