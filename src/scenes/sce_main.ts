@@ -9,46 +9,52 @@ import {World} from "../world.js";
 
 export function scene_main(game: Game) {
     game.World = new World();
-
+    const paddleXsize = 113;
+    const paddleYsize = 17;
     game.Add({
-        Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
+        Translation: [game.ViewportWidth / 2, game.ViewportHeight - 15],
         Using: [
             control_paddle(),
-            collide([83, 23]),
-            move(400, [0, 0]),
-            draw_rect(83, 23, "#bada55"),
+            collide([paddleXsize, paddleYsize]),
+            move(666, [0, 0]),
+            draw_rect(paddleXsize, paddleYsize, "#bada55"),
         ], // paletka
     });
 
+    let ballX = Math.random() * (game.ViewportWidth - 23);
+    let ballY = game.ViewportHeight / 2;
+    let angle = Math.atan(ballX / ballY); //Math.random() * Math.PI;
+    console.log(Math.cos(angle) + " " + Math.sin(angle));
+
     for (let i = 0; i < 1; i++) {
         game.Add({
-            Translation: [Math.random() * (game.ViewportWidth - 23), game.ViewportHeight / 2],
+            Translation: [ballX, ballY],
             Using: [
-                control_ball(Math.random()),
+                control_ball(),
                 collide([23, 23]),
-                move(600, [Math.random(), Math.random()]),
+                move(600, [Math.cos(angle), Math.sin(angle)]),
                 draw_rect(23, 23, "#f00ba4"),
             ], // pilka
         });
     }
-    const xBricks = 6;
+    const xBricks = 9; // odd number plz
     const yBricks = 4;
-    const x_size = 97;
-    const y_size = 31;
+    const bricksXsize = 97;
+    const bricksYsize = 31;
     const offset = 5;
     for (let i = 0; i < xBricks; i++) {
-        let x = game.ViewportWidth / 2 - Math.floor(xBricks / 2) * (x_size + offset);
-        x += i * (x_size + offset);
+        let x = game.ViewportWidth / 2 - Math.floor(xBricks / 2) * (bricksXsize + offset);
+        x += i * (bricksXsize + offset);
         for (let j = 0; j < yBricks; j++) {
-            let y = game.ViewportHeight / 5;
-            y += j * (y_size + offset);
+            let y = game.ViewportHeight / (2 * yBricks);
+            y += j * (bricksYsize + offset);
             game.Add({
                 Translation: [x, y],
                 Using: [
                     control_brick(),
-                    collide([x_size, y_size]),
+                    collide([bricksXsize, bricksYsize]),
                     move(0, [0, 0]),
-                    draw_rect(x_size, y_size, "#fab300"),
+                    draw_rect(bricksXsize, bricksYsize, "#fab300"),
                 ], // cegielka
             });
         }

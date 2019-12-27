@@ -20,8 +20,11 @@ function update(game: Game, entity: Entity, delta: number) {
     if (transform.Translation[0] > game.ViewportWidth - 1 || transform.Translation[0] < 1) {
         move.Direction[0] *= -1;
     }
-    if (transform.Translation[1] > game.ViewportHeight - 1 || transform.Translation[1] < 1) {
+    if (transform.Translation[1] < 1) {
         move.Direction[1] *= -1;
+    }
+    if (transform.Translation[1] > game.ViewportHeight) {
+        game.Destroy(entity);
     }
 
     if (collide.Collisions.length) {
