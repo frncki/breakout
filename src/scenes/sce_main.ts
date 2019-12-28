@@ -9,7 +9,14 @@ import {World} from "../world.js";
 
 export function scene_main(game: Game) {
     game.World = new World();
-    const paddleXsize = 113;
+
+    addPaddle(game);
+    addBall(game);
+    addBricks(game);
+}
+
+function addPaddle(game: Game) {
+    const paddleXsize = Math.ceil(Math.random() * 72) + 127;
     const paddleYsize = 17;
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight - 15],
@@ -20,10 +27,12 @@ export function scene_main(game: Game) {
             draw_rect(paddleXsize, paddleYsize, "#bada55"),
         ], // paletka
     });
+}
 
-    let ballX = Math.random() * (game.ViewportWidth - 23);
+function addBall(game: Game) {
+    let ballX = 13; //Math.random() * (game.ViewportWidth - 23);
     let ballY = game.ViewportHeight / 2;
-    let angle = Math.atan(ballX / ballY); //Math.random() * Math.PI;
+    let angle = Math.atan((game.ViewportWidth / 2 - ballX) / ballY); //Math.random() * Math.PI;
     console.log(Math.cos(angle) + " " + Math.sin(angle));
 
     for (let i = 0; i < 1; i++) {
@@ -32,13 +41,16 @@ export function scene_main(game: Game) {
             Using: [
                 control_ball(),
                 collide([23, 23]),
-                move(600, [Math.cos(angle), Math.sin(angle)]),
+                move(400, [Math.cos(angle), Math.sin(angle)]),
                 draw_rect(23, 23, "#f00ba4"),
             ], // pilka
         });
     }
-    const xBricks = 9; // odd number plz
-    const yBricks = 4;
+}
+
+function addBricks(game: Game) {
+    const xBricks = 2 * Math.ceil(Math.random() * 4) + 1; // odd number plz
+    const yBricks = Math.ceil(Math.random() * 6);
     const bricksXsize = 97;
     const bricksYsize = 31;
     const offset = 5;

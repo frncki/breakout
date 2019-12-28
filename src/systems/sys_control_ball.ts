@@ -28,6 +28,11 @@ function update(game: Game, entity: Entity, delta: number) {
     }
 
     if (collide.Collisions.length) {
+        let rand = Math.random();
+        if (rand < 0.01) move.Speed += 100;
+        else if (rand > 0.01 && rand < 0.26) move.Speed += 20;
+        else move.Speed += 5;
+
         let collision = collide.Collisions[0];
         if (collision.Hit[0]) {
             transform.Translation[0] += collision.Hit[0];
