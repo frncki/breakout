@@ -2,12 +2,13 @@
     "name": "breakout",
     "version": "0.0.1",
     "description": "A Breakout clone basd on Good Luck",
+    "main": "app.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/piesku/breakout.git"
+        "url": "git+https://github.com/frncki/breakout"
     },
     "contributors": [
-        "Staś Małolepszy <stas@piesku.com>"
+        "Franek Mirecki <panczo.mirecki@gmail.com>"
     ],
     "license": "ISC",
     "scripts": {
@@ -17,7 +18,7 @@
         "lint": "prettier --check \"src/**/*.ts\"",
         "pretty": "prettier --write \"src/**/*.ts\"",
         "serve": "live-server --port=1234 --no-browser --quiet public",
-        "start": "npm-run-all --parallel compile:watch serve"
+        "start": "node app.js"
     },
     "devDependencies": {
         "live-server": "1.2.1",
