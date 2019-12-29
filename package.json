@@ -18,7 +18,7 @@
         "lint": "prettier --check \"src/**/*.ts\"",
         "pretty": "prettier --write \"src/**/*.ts\"",
         "serve": "live-server --port=3000 --no-browser --quiet public",
-        "start": "npm-run-all --parallel compile:watch serve"
+        "start": "npm-run-all --parallel --port=3000"
     },
     "devDependencies": {
         "live-server": "1.2.1",
