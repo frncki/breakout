@@ -10,7 +10,7 @@ export class World {
     public Move: Array<Move> = [];
     public ControlBall: Array<ControlBall> = [];
     public ControlPaddle: Array<ControlPaddle> = [];
-    public Collide: Array<Collide> = [];
     public Draw: Array<Draw> = [];
     public Transform2D: Array<Transform2D> = [];
+    public Collide: Array<Collide> = [];
 }

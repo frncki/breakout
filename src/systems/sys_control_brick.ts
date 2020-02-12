@@ -10,10 +10,22 @@ export function sys_control_brick(game: Game, delta: number) {
         }
     }
 }
-
+let acceleration = 0;
 function update(game: Game, entity: Entity, delta: number) {
     let collide = game.World.Collide[entity];
-    if (collide.Collisions.length > 0) {
+    let transform = game.World.Transform2D[entity];
+    let move = game.World.Move[entity];
+
+    if (transform.Translation[1] > game.ViewportHeight) {
         game.Destroy(entity);
     }
+
+    if (collide.Collisions.length) {
+        move.Speed = 200;
+        acceleration = 100;
+        move.Direction = [0, 1];
+        game.World.Mask[entity] &= ~Has.Collide;
+        //game.Destroy(entity);
+    }
+    move.Speed += acceleration;
 }

@@ -24,14 +24,17 @@ function update(game: Game, entity: Entity, delta: number) {
     const left = game.InputState.ArrowLeft;
     const right = game.InputState.ArrowRight;
 
-    if (left && transform.Translation[0] - draw.Width / 2 > 0) move.Direction[0] -= 1;
-    if (right && transform.Translation[0] + draw.Width / 2 < game.ViewportWidth)
+    if (left && transform.Translation[0] - draw.Width / 2 > 0) {
+        move.Direction[0] -= 1;
+    }
+    if (right && transform.Translation[0] + draw.Width / 2 < game.ViewportWidth) {
         move.Direction[0] += 1;
+    }
 
     if (collide.Collisions.length && draw.Width > 46) {
         draw.Width -= 5;
         collide.Size[0] -= 5;
-        move.Speed += 5;
+        move.Speed += 10;
     }
 
     normalize(move.Direction, move.Direction);

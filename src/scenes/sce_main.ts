@@ -9,10 +9,9 @@ import {World} from "../world.js";
 
 export function scene_main(game: Game) {
     game.World = new World();
-
+    addBricks(game);
     addPaddle(game);
     addBall(game);
-    addBricks(game);
 }
 
 function addPaddle(game: Game) {
@@ -30,18 +29,17 @@ function addPaddle(game: Game) {
 }
 
 function addBall(game: Game) {
-    let ballX = 13; //Math.random() * (game.ViewportWidth - 23);
-    let ballY = game.ViewportHeight / 2;
-    let angle = Math.atan((game.ViewportWidth / 2 - ballX) / ballY); //Math.random() * Math.PI;
-    console.log(Math.cos(angle) + " " + Math.sin(angle));
-
     for (let i = 0; i < 1; i++) {
+        let ballX = Math.random() * (game.ViewportWidth - 23);
+        let ballY = game.ViewportHeight / 2;
+        let angle = Math.atan((ballY - 32) / Math.abs(ballX - game.ViewportWidth / 2));
+        console.log(Math.cos(angle) + " " + Math.sin(angle));
         game.Add({
             Translation: [ballX, ballY],
             Using: [
                 control_ball(),
                 collide([23, 23]),
-                move(400, [Math.cos(angle), Math.sin(angle)]),
+                move(0, [Math.cos(angle), Math.sin(angle)]),
                 draw_rect(23, 23, "#f00ba4"),
             ], // pilka
         });

@@ -11,11 +11,20 @@ export function sys_control_ball(game: Game, delta: number) {
         }
     }
 }
+let once = false;
 
 function update(game: Game, entity: Entity, delta: number) {
     let move = game.World.Move[entity];
     let transform = game.World.Transform2D[entity];
     let collide = game.World.Collide[entity];
+
+    const left = game.InputState.ArrowLeft;
+    const right = game.InputState.ArrowRight;
+
+    if ((left || right) && !once) {
+        move.Speed = 400;
+        once = true;
+    }
 
     if (transform.Translation[0] > game.ViewportWidth - 1 || transform.Translation[0] < 1) {
         move.Direction[0] *= -1;
